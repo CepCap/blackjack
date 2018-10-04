@@ -2,8 +2,8 @@ require_relative 'card'
 
 class Dealer
   attr_writer :bank
+  attr_reader :points
   attr_reader :cards_in_hand
-
 
   def initialize
     @cards_in_hand = []
@@ -27,7 +27,7 @@ class Dealer
   
   def take_card
     new_card = Card.new
-    @cards_in_hand << card.card
-    @points += card.points 
+    @cards_in_hand << new_card.card
+    @points += new_card.points 
   end
 end

@@ -3,6 +3,7 @@ require_relative 'card'
 class Player
   attr_reader :name
   attr_writer :bank
+  attr_reader :points
   attr_reader :cards_in_hand
 
   def initialize(name)
@@ -22,8 +23,10 @@ class Player
   def pass
   end
 
-  def take_card(cards)
-    @cards_in_hand << Card.new
+  def take_card
+    new_card = Card.new
+    @cards_in_hand << new_card.card
+    @points += new_card.points 
   end
 
   def reveal
