@@ -1,14 +1,23 @@
 require_relative 'card'
 
 class Dealer
-  attr_writer :bank
-  attr_reader :points
+  attr_accessor :bank
+  attr_accessor :points
   attr_reader :cards_in_hand
 
   def initialize
     @cards_in_hand = []
     @bank = 100
     @points = 0
+  end
+
+  def ace_check
+    @cards_in_hand.each do |card| 
+      if card.is_ace?
+        @points -= 10
+        break
+      end 
+    end
   end
 
   def game_start
@@ -27,7 +36,12 @@ class Dealer
   
   def take_card
     new_card = Card.new
-    @cards_in_hand << new_card.card
+    @cards_in_hand << new_card
     @points += new_card.points 
+  end
+
+  def clear
+    @cards_in_hand = []
+    @points = 0
   end
 end
