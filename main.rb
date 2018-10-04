@@ -1,14 +1,17 @@
 #core of the game is here
+require_relative 'card'
 require_relative 'player'
 require_relative 'dealer'
 
-cards_value = [['2', 2], ['3', 3], ['4', 4] ['5', 5], ['6', 6], ['7', 7], ['8', 8],
-               ['9', 9], ['10', 10], ['J', 10], ['Q', 10], ['K', 10], ['A', [1,11]]
-#  ['♠', '♥', '♣', '♦']
+@dealer = Dealer.new
+puts 'Введите ваше имя'
+@player = Player.new(gets.chomp)
+puts "Здраствуйте, #{player.name}! Начинаем игру!"
+@table_bet = 0
 
 loop
-#Введите ваше имя
-#гетс
-@cards_in_game = CARDS
-@table_bet = 0
+@table_bet += 20
+@dealer.game_start
+@player.game_start
+
 end
