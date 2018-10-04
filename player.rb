@@ -15,7 +15,8 @@ class Player
   def pass
   end
 
-  def take_card
+  def take_card(cards)
+    @cards_in_hand << cards.sample
   end
 
   def reveal

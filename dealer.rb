@@ -16,7 +16,7 @@ class Dealer
   def pass
   end
   
-  def take_card
+  def take_card(cards)
   end
 
 end
