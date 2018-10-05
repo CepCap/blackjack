@@ -1,6 +1,8 @@
 class Interface
   def introduction
     puts 'Добро пожаловать! Как вас зовут?'
+    name = gets.chomp
+    name
   end
 
   def hello(name)
@@ -26,6 +28,8 @@ class Interface
     puts '2. Пропустить ход.'
     puts '3. Вскрываемся.'
     puts
+    choice = gets.chomp
+    choice
   end
 
   def reveal(victory, dealer, player)
@@ -52,5 +56,7 @@ class Interface
 
   def play_again
     puts 'Сыграем еще? (Y/N)'
+    choice = gets.chomp.downcase
+    choice
   end
 end

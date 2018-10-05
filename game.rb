@@ -8,15 +8,12 @@ class Game
   attr_reader :dealer
   attr_reader :turn_end
 
-  def initialize
+  def initialize(player_name)
     @deck = Deck.new
     @player = Player.new
     @dealer = Dealer.new
     @turn_end = false
-  end
-
-  def player_name
-    @player.name = gets.chomp
+    @player.name = player_name
   end
 
   def game_start!
@@ -24,19 +21,18 @@ class Game
     @dealer.game_start(@deck)
   end
 
-  def turn
+  def turn(player_choice)
     @dealer.turn(@deck)
     @turn_end = true if @dealer.points > 21
-    player_choice
+    player_choice(player_choice)
     @turn_end = true if @player.points == 21 || @player.points > 21
     reveal if @turn_end == true
   end
 
-  def player_choice
-    choice = gets.to_i
-    @player.take_card(@deck) if choice == 1
-    @player.pass if choice == 2
-    @turn_end = true if choice == 3
+  def player_choice(choice)
+    @player.take_card(@deck) if choice == '1'
+    @player.pass if choice == '2'
+    @turn_end = true if choice == '3'
   end
 
   def reveal
@@ -56,10 +52,10 @@ class Game
     @victory = ''
     @player.clear
     @dealer.clear
+    @deck.shuffle
   end
 
-  def play_again?
-    choice = gets.chomp.downcase
+  def play_again?(choice)
     return true if choice == 'y'
     return false if choice == 'n'
   end
