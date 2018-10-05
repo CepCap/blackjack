@@ -4,9 +4,9 @@ class Deck
 
   CARD_RANKS = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'].freeze
   CARD_SUITS = ['♠', '♥', '♣', '♦'].freeze
-  @deck = []
 
   def initialize
+    @deck = []
     @card = ''
     shuffle
   end
@@ -20,7 +20,7 @@ class Deck
   end
 
   def take_card
-    @card = @@deck.sample
+    @card = @deck.sample
     @deck.delete(@card)
     @card
   end
