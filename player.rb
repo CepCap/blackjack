@@ -17,11 +17,10 @@ class Player
     2.times { take_card(deck) }
     @bank -= 10
     @bank = 0 if @bank < 10
-    return false if @bank == 0
+    return false if @bank.zero?
   end
 
-  def pass
-  end
+  def pass; end
 
   def take_card(deck)
     card = deck.take_card
@@ -29,7 +28,7 @@ class Player
     if card[0].is_a? Integer
       @points += card[0]
     elsif card[0] == 'A'
-      (@points += 11) <= 21 ? @points += 11 : @points += 1
+      @points += (@points += 11) <= 21 ? 11 : 1
     else
       @points = 10
     end

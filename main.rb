@@ -10,7 +10,7 @@ interface.hello(game.player.name)
 loop do
   loop do
     game.game_start!
-    interface.turn(game.dealer,game.player)
+    interface.turn(game.dealer, game.player)
     interface.player_choice
     game.turn
     interface.reveal(game.victory, game.dealer, game.player) if game.turn_end
