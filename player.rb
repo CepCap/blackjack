@@ -1,20 +1,20 @@
-require_relative 'card'
+require_relative 'deck'
 
 class Player
-  attr_reader :name
   attr_accessor :bank
   attr_accessor :points
+  attr_accessor :name
   attr_reader :cards_in_hand
 
-  def initialize(name)
+  def initialize
     @cards_in_hand = []
     @bank = 100
     @points = 0
-    @name = name
+    @name = ''
   end
 
-  def game_start
-    2.times { take_card }
+  def game_start(deck)
+    2.times { take_card(deck) }
     @bank -= 10
     @bank = 0 if @bank < 10
     return false if @bank == 0
@@ -23,10 +23,16 @@ class Player
   def pass
   end
 
-  def take_card
-    new_card = Card.new
-    @cards_in_hand << new_card
-    @points += new_card.points 
+  def take_card(deck)
+    card = deck.take_card
+    @cards_in_hand << card
+    if card[0].is_a? Integer
+      @points += card[0]
+    elsif card[0] == 'A'
+      (@points += 11) <= 21 ? @points += 11 : @points += 1
+    else
+      @points = 10
+    end
   end
 
   def clear
