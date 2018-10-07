@@ -11,6 +11,7 @@ class Player
     @bank = 100
     @points = 0
     @name = ''
+    @aces_in_hand = 0
   end
 
   def game_start(deck)
@@ -25,13 +26,15 @@ class Player
   def take_card(deck)
     card = deck.take_card
     @cards_in_hand << card
-    if card[0].is_a? Integer
-      @points += card[0]
-    elsif card[0] == 'A'
-      @points += (@points += 11) <= 21 ? 11 : 1
+    if card.rank =~ (/\A[-+]?\d+\z/)
+      @points += card.rank.to_i
+    elsif card.rank == 'A'
+      @aces_in_hand += 1
+      @points += 11
     else
-      @points = 10
+      @points += 10
     end
+    (@points -= 10) if points > 21 && @aces_in_hand >= 1
   end
 
   def clear

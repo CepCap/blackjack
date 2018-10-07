@@ -14,6 +14,14 @@ loop do
       break if game.turn_end
     end
     interface.reveal(game.victory, game.dealer, game.player)
+    if game.lose?
+      interface.lose
+      break
+    end
+    if game.win?
+      interface.win
+      break
+    end
     game.clear
   end
   break unless game.play_again?(interface.play_again)

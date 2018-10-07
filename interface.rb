@@ -17,7 +17,9 @@ class Interface
     puts "Ваш банк: #{player.bank}"
     puts 'Фишки  на кону: 20'
     puts "Карты дилера: #{'* ' * dealer.cards_in_hand.length}"
-    puts "Ваши карты: #{player.cards_in_hand.flatten.join}"
+    print "Ваши карты: " 
+    player.cards_in_hand.each { |card| print "#{card.rank}#{card.suit} " }
+    puts
     puts "Очки: #{player.points}"
     puts 'Ваш ход!'
     puts
@@ -47,11 +49,23 @@ class Interface
       puts 'Вы проиграли!'
       puts '************'
     end
-    puts "Карты дилера: #{dealer.cards_in_hand.flatten.join(' ')}"
-    puts "Ваши карты: #{player.cards_in_hand.flatten.join(' ')}"
+    puts "Карты дилера:"
+    dealer.cards_in_hand.each { |card| print "#{card.rank}#{card.suit} " }
+    puts
+    puts "Ваши карты:"
+    player.cards_in_hand.each { |card| print "#{card.rank}#{card.suit} " }
+    puts
     puts "Очки дилера: #{dealer.points}"
     puts "Ваши очки: #{player.points}"
     puts
+  end
+
+  def lose
+    puts "Вы проиграли, ваш банк равен нулю!"
+  end
+
+  def win
+    puts "Поздравляем, вы победили!"
   end
 
   def play_again

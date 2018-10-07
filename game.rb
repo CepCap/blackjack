@@ -1,6 +1,7 @@
 require_relative 'deck'
 require_relative 'player'
 require_relative 'dealer'
+require_relative 'card'
 
 class Game
   attr_reader :victory
@@ -53,6 +54,14 @@ class Game
     @player.clear
     @dealer.clear
     @deck.shuffle
+  end
+
+  def lose?
+    return true if @player.bank.zero?
+  end
+
+  def win?
+    return true if @dealer.bank.zero?
   end
 
   def play_again?(choice)
